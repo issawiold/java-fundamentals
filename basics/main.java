@@ -13,7 +13,7 @@ System.out.println("I own " + catCount + " " + pluralize("cat", catCount) + ".")
 
 int turtleCount = 0;
 System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
-flipNHeads(1);
+flipNHeads(3);
 clock();
 
 
@@ -36,7 +36,7 @@ clock();
         float flip;
         int count = 0;
         int i =0;
-        if (num>1){
+        if (num<1){
             System.out.println( "Kindly enter a valid number");
         }
         while (count<num){
@@ -44,6 +44,7 @@ clock();
             flip=rand.nextFloat();
             if(flip<.5f){
                 System.out.println("tails");
+                count=0;
             }
             else{
                 System.out.println("heads");
