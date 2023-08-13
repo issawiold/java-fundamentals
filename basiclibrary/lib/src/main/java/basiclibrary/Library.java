@@ -3,8 +3,7 @@
  */
 package basiclibrary;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class Library {
     public static void main(String[] args) {
@@ -61,6 +60,57 @@ public class Library {
         return minIndex;
 
     }
+
+    public static void analyzeData(int[][] arr) {
+        Set<Integer> data = new HashSet<>();
+        for (int[] e : arr) {
+            for (int l : e) {
+                data.add(l);
+            }
+        }
+        int max = Collections.max(data);
+        int min = Collections.min(data);
+        int[] taken = new int[4];
+        System.out.println("High: " + max);
+        System.out.println("Low: " + min);
+        for (int i = 0; i < 4; i++) {
+            taken[i] = numberNotUsed(data, taken, min, max);
+            System.out.println("Never saw temperature: " + taken[i]);
+        }
+    }
+
+    public static int numberNotUsed(Set<Integer> set1, int[] arr, int min, int max) {
+        Random rand = new Random();
+        TreeSet<Integer> data = new TreeSet<>();
+        data.addAll(set1);
+        int int_random;
+        int rando = 0;
+        do {
+            int_random = rand.nextInt(max - min + 1) + min;
+        } while ((data.contains(int_random)) || Arrays.asList(arr).contains(int_random));
+        return rando;
+    }
+
+    public static String tally(ArrayList<String> list) {
+        HashMap<String, Integer> votes = new HashMap<>();
+        for (String e : list) {
+            votes.put(e, votes.getOrDefault(e, 0) + 1);
+        }
+        return maxValue(votes);
+    }
+
+    public static String maxValue(HashMap<String, Integer> map) {
+        String maxKey = "";
+        int maxValue = 0;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > maxValue) {
+                maxValue = entry.getValue();
+                maxKey = entry.getKey();
+            }
+        }
+        return maxKey;
+    }
+
 
 
 }
