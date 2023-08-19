@@ -26,7 +26,7 @@ public class Library {
                 Matcher matcher2 = pattern2.matcher(line);
                 Matcher matcher3 = pattern3.matcher(line);
                 Matcher matcher4 = pattern4.matcher(line);
-                if (!(matcher1.find() || matcher2.find() || matcher3.find() || matcher4.find())) {
+                if (!(matcher1.find() || matcher2.find() || matcher3.find() || matcher4.find()|| line.isEmpty())) {
                     Matcher matcher5 = pattern5.matcher(line);
                     if (!(matcher5.find())) {
                         System.out.println("Line " + counter + ": Missing semicolon.");

@@ -3,12 +3,21 @@
  */
 package basiclibrary;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +61,7 @@ class LibraryTest {
         int [] arrWithLowestAvg=sut.theLowestAverageArr(weeklyMonthTemperatures);
         Assertions.assertArrayEquals(expectedValue,arrWithLowestAvg);
     };
+
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -59,15 +69,66 @@ class LibraryTest {
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
-    @Test
-    void givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess() {
-        print("Hello Baeldung Readers!!");
 
-        assertEquals("Hello Baeldung Readers!!", outputStreamCaptor.toString()
-                .trim());
+    @Test
+    void testAnalyzeData() {
+        Library sut = new Library();
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+        int min = 51;
+        int max = 72;
+
+        sut.analyzeData(weeklyMonthTemperatures);
+
+        String[] parts = outputStreamCaptor.toString().trim().split("\n");
+        System.out.println(Arrays.toString(parts));
+        assertEquals("High: " + max+"\r", parts[0]);
+        assertEquals("Low: " + min+"\r", parts[1]);
+//        Pattern pattern = Pattern.compile("\\d");
+//
+//        for (int i = 2; i < parts.length; i++) {
+//            Matcher matcher = pattern.matcher(parts[i]);
+//            System.out.println(parts[i]);
+//            int num = Integer.parseInt(matcher.group(0));
+//            assertTrue(min < num && num < max);
+//            for (int []e:weeklyMonthTemperatures
+//                 ) {
+//                assertFalse(Arrays.asList(e).contains(num));
+//            }
+//        }
+
     }
+
+
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
     }
+    @BeforeEach
+    public void setUp1() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+    @Test
+    void testTally(){
+        Library sut = new Library();
+        ArrayList<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+    sut.tally(votes);
+        Assertions.assertEquals("Bush received the most votes!",outputStreamCaptor.toString().trim());
+    }
+
 }
+
+
