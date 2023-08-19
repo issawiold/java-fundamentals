@@ -70,33 +70,22 @@ public class Library {
         }
         int max = Collections.max(data);
         int min = Collections.min(data);
-        int[] taken = new int[4];
         System.out.println("High: " + max);
         System.out.println("Low: " + min);
-        for (int i = 0; i < 4; i++) {
-            taken[i] = numberNotUsed(data, taken, min, max);
-            System.out.println("Never saw temperature: " + taken[i]);
+        for (int i = min; i < max; i++) {
+            if(!data.contains(i))
+            System.out.println("Never saw temperature: " + i);
         }
     }
 
-    public static int numberNotUsed(Set<Integer> set1, int[] arr, int min, int max) {
-        Random rand = new Random();
-        TreeSet<Integer> data = new TreeSet<>();
-        data.addAll(set1);
-        int int_random;
-        int rando = 0;
-        do {
-            int_random = rand.nextInt(max - min + 1) + min;
-        } while ((data.contains(int_random)) || Arrays.asList(arr).contains(int_random));
-        return rando;
-    }
 
-    public static String tally(ArrayList<String> list) {
+
+    public static void tally(ArrayList<String> list) {
         HashMap<String, Integer> votes = new HashMap<>();
         for (String e : list) {
             votes.put(e, votes.getOrDefault(e, 0) + 1);
         }
-        return maxValue(votes);
+        System.out.println( maxValue(votes)+" received the most votes!");
     }
 
     public static String maxValue(HashMap<String, Integer> map) {
@@ -110,6 +99,7 @@ public class Library {
         }
         return maxKey;
     }
+
 
 
 
