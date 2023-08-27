@@ -23,16 +23,16 @@ class RestaurantTest {
         Restaurant restaurent= new Restaurant("hello",5,2);
         Review review = new Review("Great food!", "John Doe", 5);
 
-        assertEquals("Great food!", review.body);
-        assertEquals("John Doe", review.author);
-        assertEquals(5, review.stars);
+        assertEquals("Great food!", review.getBody());
+        assertEquals("John Doe", review.getAuthor());
+        assertEquals(5, review.getStars());
     }
 
     @Test
     void testStarRatingUpdate() {
         Restaurant restaurant = new Restaurant("Sample Restaurant", 4, 2);
         Review review = new Review("Great food!", "John Doe", 4);
-        restaurant.addReview(review.body, review.author, review.stars);
+        restaurant.addReview(review.getBody(), review.getAuthor(), review.getStars());
         assertEquals(4, restaurant.stars);
     }
     @Test

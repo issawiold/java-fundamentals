@@ -5,23 +5,27 @@ import java.util.ArrayList;
 public class Business {
 
 
-        protected ArrayList<Review> reviews=new ArrayList<>();
+        private ArrayList<Review> reviews=new ArrayList<>();
         private int counter = 1;
-        protected String name;
-        protected double stars;
-        protected String price;
+        private String name;
+        private double stars;
+        private String price;
 
-        public Business(String name, double stars, int price) {
-            this.name = name;
+        protected Business(String name, double stars, int price) {
+            setName(name);
             setStars(stars);
             setPrice(price);
         }
 
-        public  String toString() {
+        public    String toString() {
             return "the Restaurant's name: " + this.name + "\n\rNumber of stars: " + this.stars + "\n\rPrices: " + this.price;
         }
 
-        public void setStars(double stars) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStars(double stars) {
             if (stars >= 0 && stars <= 5) {
                 this.stars = stars;
                 return;
@@ -44,7 +48,8 @@ public class Business {
 
 
         public void calculateStarsAfterReview(double newReviewStars) {
-            this.stars = (counter * this.stars + newReviewStars) / (counter + 1);
+            double previousStars=getStars();
+            setStars ((counter * previousStars + newReviewStars)/(counter + 1));
             counter++;
         }
 
