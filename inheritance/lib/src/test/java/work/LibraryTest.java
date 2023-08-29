@@ -14,9 +14,9 @@ class RestaurantTest {
     @Test
     void testRestaurantConstructor() {
         Restaurant restaurant = new Restaurant("Sample Restaurant", 4, 2);
-        assertEquals("Sample Restaurant", restaurant.name);
-        assertEquals(4, restaurant.stars);
-        assertEquals("$$", restaurant.price); // Check if price is correct based on 2 dollar signs
+        assertEquals("Sample Restaurant", restaurant.getName());
+        assertEquals(4.0, restaurant.getStars());
+        assertEquals("$$", restaurant.getPrice()); // Check if price is correct based on 2 dollar signs
     }
     @Test
     void testReviewConstructor() {
@@ -25,7 +25,7 @@ class RestaurantTest {
 
         assertEquals("Great food!", review.getBody());
         assertEquals("John Doe", review.getAuthor());
-        assertEquals(5, review.getStars());
+        assertEquals(5.0, review.getStars());
     }
 
     @Test
@@ -33,13 +33,13 @@ class RestaurantTest {
         Restaurant restaurant = new Restaurant("Sample Restaurant", 4, 2);
         Review review = new Review("Great food!", "John Doe", 4);
         restaurant.addReview(review.getBody(), review.getAuthor(), review.getStars());
-        assertEquals(4, restaurant.stars);
+        assertEquals(4.0, restaurant.getStars());
     }
     @Test
     void testRestaurantToString() {
         Restaurant restaurant = new Restaurant("Sample Restaurant", 4, 2);
 
-        String expected = "the Restaurant's name: Sample Restaurant\n\rNumber of stars: 4\n\rPrices: $$";
+        String expected = "the Restaurant's name: Sample Restaurant\n\rNumber of stars: 4.0\n\rPrices: $$";
         assertEquals(expected, restaurant.toString());
     }
 
@@ -49,7 +49,7 @@ class RestaurantTest {
         Review review = new Review("Great food!", "John Doe", 5);
 
         String expected = "Review by John Doe" + System.lineSeparator()
-                + "Stars: 5" + System.lineSeparator()
+                + "Stars: 5.0" + System.lineSeparator()
                 + "Review: Great food!";
 
         assertEquals(expected, review.toString());

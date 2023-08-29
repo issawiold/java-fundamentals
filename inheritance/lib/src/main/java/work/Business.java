@@ -68,6 +68,13 @@ public class Business {
         calculateStarsAfterReview(stars);
     }
 
+    public String getName() {
+        return name;
     }
+
+    public String getPrice() {
+        return price;
+    }
+}
 
 
